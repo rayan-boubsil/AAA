@@ -4,9 +4,15 @@ import os
 from datetime import datetime
 import subprocess
 import time
+from jinja2 import Environment, FileSystemLoader
+
+env = Environment(loader=FileSystemLoader('templates'))
 
 
-# informations sur le processeur
+template = env.get_template('template.html')
+
+
+
 def info_process():
     nb_coeurs = psutil.cpu_count()
     frequence = psutil.cpu_freq().current
@@ -18,7 +24,6 @@ def info_process():
         "cpu_usage": cpu_usage
     }
 
-# informations sur la mémoire
 def info_memory():
     ram = psutil.virtual_memory()
     ram_percent = ram.percent
@@ -160,3 +165,6 @@ output = template.render (
     ram_used_gb = ram_data["ram_used_gb"],
     ram_total_gb = ram_data["ram_total_gb"],
 )
+
+with open('index.html', 'w', encoding='utf-8') as f:
+    f.write(index.html)
