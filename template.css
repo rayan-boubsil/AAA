@@ -1,0 +1,173 @@
+/* ---------- GLOBAL ---------- */
+    body {
+        font-family: OCR A Std, monospace;
+        background: black;
+        color: white;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main { flex: 1; padding: 20px; display: flex; justify-content: center; 
+    background-image: url("/Images/48e1c7e093f6437924c01eb612ef8eb6.jpeg");
+    }
+
+    footer {
+        background: black;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+        background: black;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    header h1 {
+        font-family: OCR A Std, monospace;
+        margin: 0;
+        font-size: 25px;
+        letter-spacing: 4px;
+    }
+
+    header .header-logo {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+    }
+
+    /* ---------- DASHBOARD GRID ---------- */
+    .dashboard {
+        display: grid;
+        grid-template-columns: repeat(2, 260px);
+        grid-template-rows: (3, 260px);
+        row-gap: 25px;
+        column-gap: 150px;
+    }
+
+    /* ---------- CARTE ---------- */
+    details.card {
+        background: black;
+        border-radius: 5px;
+        cursor: pointer;
+        overflow: hidden;
+        border: 1px solid  black;
+        transition: transform 0.2s ease, background 0.3s ease;
+        position: relative;
+        height: 160px; /* hauteur fixe pour ne pas bouger les autres cartes */
+    }
+
+    details.card:hover { transform: scale(1.05); background: black; }
+
+    details.card[open] { height: auto; background: black; }
+
+    summary {
+        list-style: none;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-height: 160px;
+        box-sizing: border-box;
+    }
+
+    /* summary::-webkit-details-marker { display: none; } */
+
+    .logo {
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+        margin-bottom: 12px;
+    }
+
+    .content {
+        padding: 15px;
+        font-size: 14px;
+        border-top: 1px solid  black;
+    }
+
+    /* ---------- BOUTON RETOUR EN HAUT ---------- */
+    .back-to-top {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: #3a3a3a;
+        color: white;
+        font-size: 24px;
+        padding: 10px 15px;
+        border-radius: 50%;
+        text-decoration: none;
+        border: 2px solid  black;
+        transition: 0.3s;
+    }
+
+    .back-to-top:hover { background:  black; transform: scale(1.15); }
+
+/* ---------- RESPONSIVE TABLETTE ---------- */
+@media (max-width: 1024px) {
+
+    /* Grille élargie */
+    .dashboard {
+        grid-template-columns: 1fr 1fr; /* 2 colonnes mais plus larges */
+        gap: 30px;
+        width: 100%;
+        max-width: 900px;
+    }
+
+    details.card {
+        height: 190px; /* plus large en hauteur */
+        border-width: 2px;
+    }
+
+    summary {
+        min-height: 190px;
+        padding: 25px;
+    }
+
+    .logo {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+/* ---------- RESPONSIVE MOBILE ---------- */
+@media (max-width: 600px) {
+
+    /* Full width sur mobile – tout prend toute la largeur */
+    .dashboard {
+        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 100%;
+        gap: 25px;
+    }
+
+    details.card {
+        height: 200px; /* encore plus grand pour mobile */
+        border-width: 2px;
+    }
+
+    summary {
+        min-height: 200px;
+        padding: 28px; /* pour de belles zones cliquables */
+    }
+
+    .logo {
+        width: 90px;
+        height: 90px;
+    }
+
+    .content {
+        font-size: 15px;
+        padding: 20px;
+    }
+}
