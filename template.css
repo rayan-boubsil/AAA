@@ -1,7 +1,7 @@
 /* ---------- GLOBAL ---------- */
     body {
         font-family: OCR A Std, monospace;
-        background: black;
+        background: green;
         color: white;
         margin: 0;
         min-height: 100vh;
@@ -10,7 +10,7 @@
     }
 
     main { flex: 1; padding: 20px; display: flex; justify-content: center; 
-    background-image: url("/Images/48e1c7e093f6437924c01eb612ef8eb6.jpeg");
+    background-image: url(/Images/Data_security_10.jpg) ;
     }
 
     footer {
@@ -47,10 +47,10 @@
     /* ---------- DASHBOARD GRID ---------- */
     .dashboard {
         display: grid;
-        grid-template-columns: repeat(2, 260px);
-        grid-template-rows: (3, 260px);
+        grid-template-rows: (6, 260px);
         row-gap: 25px;
         column-gap: 150px;
+        width: 90%;
     }
 
     /* ---------- CARTE ---------- */
