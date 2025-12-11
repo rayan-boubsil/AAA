@@ -1,7 +1,7 @@
 /* ---------- GLOBAL ---------- */
     body {
         font-family: OCR A Std, monospace;
-        background: black;
+        background: green;
         color: white;
         margin: 0;
         min-height: 100vh;
@@ -10,7 +10,7 @@
     }
 
     main { flex: 1; padding: 20px; display: flex; justify-content: center; 
-    background-image: url("/AAA/Images/virus-detected-hacker-full-hd-wzs4a5f59okzbkde.jpg");
+    background-image: url(/AAA/Images/Data_security_10.jpg) ;
     }
 
     footer {
