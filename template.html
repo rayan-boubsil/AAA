@@ -1,87 +1,107 @@
-<!doctype html> 
+<!doctype html>
 <html lang="en">
-   <head>
-	 <meta charset="utf-8">
-	 <title>Monitoring VM Linux</title>
-     <link rel="stylesheet" href="template.css">
-   </head>
-   <body>
-    <header class="header">
-      <h1>Dashboard PC</h1>
-    </header>
-    <main>
-    <section class="dashboard">
+<head>
+    <meta charset="utf-8">
+    <title>Monitoring VM Linux</title>
+    <link rel="stylesheet" href="template.css">
+</head>
 
-        <!-- SECTION SYSTEME -->
-        <details class="card">
-            <summary>
-                <img src="/Images/icons8-poste-de-travail-50.png" class="logo" alt="">
-                <span>Système</span>
-            </summary>
-            <div class="content">
-                -<br>-<br>-<br>-
-            </div>
-        </details>
+<body>
+<header class="header">
+    <h1>Monitoring VM Linux</h1>
+</header>
 
-        <!-- SECTION CPU -->
-        <details class="card">
-            <summary>
-                <img src="/Images/icons8-cpu-50.png" class="logo" alt="">
-                <span>CPU</span>
-            </summary>
-            <div class="content">
-                -<br>-<br>-
-            </div>
-        </details>
+<main>
+<section class="dashboard">
 
-        <!-- SECTION MEMOIRE -->
-        <details class="card">
-            <summary>
-                <img src="/Images/icons8-ssd-50.png" class="logo" alt="">
-                <span>Mémoire</span>
-            </summary>
-            <div class="content">
-                -<br>-<br>-<br>-
-            </div>
-        </details>
+    <!-- SECTION SYSTEME -->
+    <details class="card">
+        <summary>
+            <img src="Images/icons8-poste-de-travail-50.png" class="logo" alt="">
+            <span>System</span>
+        </summary>
+        <div class="content">
+            -<br>{{ system_hostname }}<br>
+            -{{ system_os_info }}<br>
+            -{{ system_boot_time }}<br>
+            -{{ system_uptime }}<br>
+            -{{ system_user_count }}<br>
+            -{{ system_main_ip }}
+        </div>
+    </details>
 
-        <!-- SECTION RESEAU -->
-        <details class="card">
-            <summary>
-                <img src="/Images/icons8-routeur-wi-fi-50.png" class="logo" alt="">
-                <span>Réseau</span>
-            </summary>
-            <div class="content">
-                -
-            </div>
-        </details>
+    <!-- SECTION CPU -->
+    <details class="card">
+        <summary>
+            <img src="Images/icons8-cpu-50.png" class="logo" alt="">
+            <span>CPU</span>
+        </summary>
+        <div class="content">
+            -<br>{{ cpu_cores_count }}<br>
+            -{{ cpu_current_freq_mhz }}<br>
+            -{{ cpu_total_usage_percent }}
+        </div>
+    </details>
 
-        <!-- SECTION PROCESSUS -->
-        <details class="card">
-            <summary>
-                <img src="/Images/icons8-application-50.png" class="logo" alt="">
-                <span>Processus</span>
-            </summary>
-            <div class="content">
-                -<br>-<br>--<br>-<br>--<br>-<br>--<br>-<br>--<br>-<br>--<br>-<br>-
-            </div>
-        </details>
+    <!-- SECTION MEMOIRE -->
+    <details class="card">
+        <summary>
+            <img src="Images/icons8-ssd-50.png" class="logo" alt="">
+            <span>Mémoire</span>
+        </summary>
+        <div class="content">
+            -<br>{{ ram_usage_percent }}<br>
+            -{{ ram_used_gb }}<br>
+            -{{ ram_total_gb }}
+        </div>
+    </details>
 
-        <!-- SECTION FICHIERS -->
-        <details class="card">
-            <summary>
-                <img src="/Images/icons8-documents-50.png" class="logo" alt="">
-                <span>Fichiers</span>
-            </summary>
-            <div class="content">
-                -<br>-<br>-<br>-
-            </div>
-        </details>
+    <!-- SECTION RESEAU -->
+    <details class="card">
+        <summary>
+            <img src="Images/icons8-routeur-wi-fi-50.png" class="logo" alt="">
+            <span>Réseau</span>
+        </summary>
+        <div class="content">
+            -{{ system_main_ip }}
+        </div>
+    </details>
 
-      </section>
+    <!-- SECTION PROCESSUS -->
+    <details class="card">
+        <summary>
+            <img src="Images/icons8-application-50.png" class="logo" alt="">
+            <span>Processus</span>
+        </summary>
+        <div class="content">
+            {{ top_processes }}
+        </div>
+    </details>
+
+    <!-- SECTION FICHIERS -->
+    <details class="card">
+        <summary>
+            <img src="Images/icons8-documents-50.png" class="logo" alt="">
+            <span>Fichiers</span>
+        </summary>
+        <div class="content">
+            -<br>{{ analyzed_directory }}<br>
+            -{{ file_directory }}<br>
+            -{{ size_directory }}<br>
+            -{{ info_txt }}<br>
+            -{{ info_py }}<br>
+            -{{ info_pdf }}<br>
+            -{{ info_jpg }}
+        </div>
+    </details>
+
+</section>
 </main>
-    <footer>
-       <p>© 2025 Dashboard PC</p>
-    </footer>
-   </body>
+
+<footer>
+    <img src="Images/illu_logo_blog-56-1024x562.png" width="150px">
+    <p>Virtual Machine Linux</p>
+</footer>
+
+</body>
 </html>

@@ -7,7 +7,7 @@ import time
 
 
 # informations sur le processeur
-def info_processeurs():
+def info_process():
     nb_coeurs = psutil.cpu_count()
     frequence = psutil.cpu_freq().current
     cpu_usage = psutil.cpu_percent()
@@ -19,7 +19,7 @@ def info_processeurs():
     }
 
 # informations sur la mémoire
-def info_memoire():
+def info_memory():
     ram = psutil.virtual_memory()
     ram_percent = ram.percent
     ram_used = round(ram.used / 1e9, 2)
@@ -30,8 +30,6 @@ def info_memoire():
         "ram utilisé (gb)": ram_used,
         "ram total (gb)": ram_total
     }
-
-
 
 
 hostname = platform.node()
@@ -137,6 +135,9 @@ for ext, count in extension_count.items():
         'percentage': f"{purcentage:.2f}" 
     }
 
+cpu_data = info_process()
+ram_data = info_memory()
+
 output = template.render (
     system_hostname = hostname,
     system_os_info = info_os,
@@ -148,9 +149,14 @@ output = template.render (
     analyzed_directory = files_analysis,
     file_directory = file,
     size_directory = size,
-    info_txt = extension_results['.txt']
-    info_py = extension_results['.py']
-    info_pdf = extension_results['.pdf']
-    info_jpg = extension_results['.jpg']
+    info_txt = extension_results['.txt'],
+    info_py = extension_results['.py'],
+    info_pdf = extension_results['.pdf'],
+    info_jpg = extension_results['.jpg'],
+    cpu_cores_count = cpu_data["nb_coeurs"],
+    cpu_current_freq_mhz = cpu_data["frequence"],
+    cpu_total_usage_percent = cpu_data["cpu_usage"],
+    ram_usage_percent = ram_data["ram_percent"],
+    ram_used_gb = ram_data["ram_used_gb"],
+    ram_total_gb = ram_data["ram_total_gb"],
 )
-
