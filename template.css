@@ -47,10 +47,10 @@
     /* ---------- DASHBOARD GRID ---------- */
     .dashboard {
         display: grid;
-        grid-template-columns: repeat(2, 260px);
-        grid-template-rows: (3, 260px);
+        grid-template-rows: (6, 260px);
         row-gap: 25px;
         column-gap: 150px;
+        width: 90%;
     }
 
     /* ---------- CARTE ---------- */
