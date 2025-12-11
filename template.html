@@ -21,12 +21,12 @@
             <span>System</span>
         </summary>
         <div class="content">
-            -<br>{{ system_hostname }}<br>
-            -{{ system_os_info }}<br>
-            -{{ system_boot_time }}<br>
-            -{{ system_uptime }}<br>
-            -{{ system_user_count }}<br>
-            -{{ system_main_ip }}
+            Hostname : {{ system_hostname }}<br>
+            OS : {{ system_os_info }}<br>
+            Boot time : {{ system_boot_time }}<br>
+            Uptime : {{ system_uptime }}<br>
+            Utilisateurs : {{ system_user_count }}<br>
+            IP : {{ system_main_ip }}
         </div>
     </details>
 
@@ -37,9 +37,9 @@
             <span>CPU</span>
         </summary>
         <div class="content">
-            -<br>{{ cpu_cores_count }}<br>
-            -{{ cpu_current_freq_mhz }}<br>
-            -{{ cpu_total_usage_percent }}
+            Cores : {{ cpu_data.nb_coeurs }}<br>
+            Fréquence : {{ cpu_data.frequence }} MHz<br>
+            Utilisation totale : {{ cpu_data.cpu_usage }} %
         </div>
     </details>
 
@@ -50,9 +50,9 @@
             <span>Mémoire</span>
         </summary>
         <div class="content">
-            -<br>{{ ram_usage_percent }}<br>
-            -{{ ram_used_gb }}<br>
-            -{{ ram_total_gb }}
+            Utilisation : {{ ram_data["ram (%)"] }} %<br>
+            RAM utilisée : {{ ram_data["ram utilisé (gb)"] }} GB<br>
+            RAM totale : {{ ram_data["ram total (gb)"] }} GB
         </div>
     </details>
 
@@ -63,7 +63,7 @@
             <span>Réseau</span>
         </summary>
         <div class="content">
-            -{{ system_main_ip }}
+            IP : {{ system_main_ip }}
         </div>
     </details>
 
@@ -74,7 +74,11 @@
             <span>Processus</span>
         </summary>
         <div class="content">
-            {{ top_processes }}
+            <ul>
+            {% for name, cpu, ram, total in top_processes %}
+                <li>{{ name }} | CPU: {{ cpu }} % | RAM: {{ ram }} % | Total: {{ total }} %</li>
+            {% endfor %}
+            </ul>
         </div>
     </details>
 
@@ -85,13 +89,19 @@
             <span>Fichiers</span>
         </summary>
         <div class="content">
-            -<br>{{ analyzed_directory }}<br>
-            -{{ file_directory }}<br>
-            -{{ size_directory }}<br>
-            -{{ info_txt }}<br>
-            -{{ info_py }}<br>
-            -{{ info_pdf }}<br>
-            -{{ info_jpg }}
+            Dossier analysé : {{ analyzed_directory }}<br>
+            <ul>
+            {% for filename, info in files_info.items() %}
+                <li>{{ filename }} | Dossier : {{ info.folder }} | Taille : {{ info.size }} octets | Chemin : {{ info.path }}</li>
+            {% endfor %}
+            </ul>
+            <p>Extensions :</p>
+            <ul>
+                <li>TXT : {{ extension_results['.txt'].count }} ({{ extension_results['.txt'].percentage }}%)</li>
+                <li>PY : {{ extension_results['.py'].count }} ({{ extension_results['.py'].percentage }}%)</li>
+                <li>PDF : {{ extension_results['.pdf'].count }} ({{ extension_results['.pdf'].percentage }}%)</li>
+                <li>JPG : {{ extension_results['.jpg'].count }} ({{ extension_results['.jpg'].percentage }}%)</li>
+            </ul>
         </div>
     </details>
 

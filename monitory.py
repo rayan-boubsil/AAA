@@ -6,7 +6,7 @@ import subprocess
 import time
 from jinja2 import Environment, FileSystemLoader
 
-env = Environment(loader=FileSystemLoader('templates'))
+env = Environment(loader=FileSystemLoader('.'))
 
 
 template = env.get_template('template.html')
@@ -74,7 +74,7 @@ def get_main_ip():
         return "file not found"
     except subprocess.CalledProcessError as e:
         return f"Erreur exécution de la commande {e.returncode}"
-    except other as e:
+    except Exception as e:
         return f"Autre erreur : {e}"
 main_ip = get_main_ip()
 
@@ -92,9 +92,6 @@ for i in psutil.process_iter(['name']):
     total = cpu + ram    
     process.append((i.info['name'], cpu, ram, total))
 
-def global_top3():
-    return element[3]
-
 global_top3 = sorted(process, key=lambda top: top[3], reverse=True)[:3]
 
 
@@ -103,12 +100,20 @@ for name, cpu, ram, total in global_top3:
 
 files_analysis = ("/home/noe/Documents")   
 
-for root, subfolder, files in os.walk(files_analysis):
-    print(f"\n Dans : {root}")
+files_info = {}
 
+for root, subfolders, files in os.walk(files_analysis):
+    folder_name = os.path.basename(root)  
     for file in files:
         path = os.path.join(root, file)
         size = os.path.getsize(path)
+        files_info[file] = {
+            "name": file,          
+            "folder": folder_name, 
+            "path": path,          
+            "size": size           
+        }
+
 
         print(f"   - {file} | Taille : {size} octets")
 
@@ -152,19 +157,11 @@ output = template.render (
     system_main_ip = main_ip,
     top_processes = global_top3,
     analyzed_directory = files_analysis,
-    file_directory = file,
-    size_directory = size,
-    info_txt = extension_results['.txt'],
-    info_py = extension_results['.py'],
-    info_pdf = extension_results['.pdf'],
-    info_jpg = extension_results['.jpg'],
-    cpu_cores_count = cpu_data["nb_coeurs"],
-    cpu_current_freq_mhz = cpu_data["frequence"],
-    cpu_total_usage_percent = cpu_data["cpu_usage"],
-    ram_usage_percent = ram_data["ram_percent"],
-    ram_used_gb = ram_data["ram_used_gb"],
-    ram_total_gb = ram_data["ram_total_gb"],
+    files_info = files_info,
+    extension_results = extension_results,
+    cpu_data = cpu_data,
+    ram_data = ram_data
 )
 
 with open('index.html', 'w', encoding='utf-8') as f:
-    f.write(index.html)
+    f.write(output)
